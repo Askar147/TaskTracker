@@ -17,7 +17,7 @@ namespace TaskTracker.Controllers
 
         public ProjectController(TaskTrackerDataContext context)
         {
-            _context= context;
+            _context = context;
         }
 
         // GET: api/<ProjectController>
@@ -29,7 +29,7 @@ namespace TaskTracker.Controllers
 
         // GET api/<ProjectController>/5
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> GetTask(int id)
         {
             var project = await _context.Projects.FindAsync(id);
 
