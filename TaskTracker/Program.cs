@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using TaskTrackerData;
+
 namespace TaskTracker
 {
     public class Program
@@ -12,6 +15,9 @@ namespace TaskTracker
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<TaskTrackerDataContext>(
+                t => t.UseNpgsql(builder.Configuration.GetConnectionString("TaskTrackerDb"))
+                );
 
             var app = builder.Build();
 
