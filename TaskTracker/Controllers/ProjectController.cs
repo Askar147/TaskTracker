@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TaskTracker.RequestModels;
+using TaskTrackerData;
 using TaskTrackerData.Models;
 using TaskTrackerData.Statuses;
 
@@ -10,41 +13,45 @@ namespace TaskTracker.Controllers
     [ApiController]
     public class ProjectController : ControllerBase
     {
-        private List<Project> _projects = new List<Project>
+        private readonly TaskTrackerDataContext _context;
+
+        public ProjectController(TaskTrackerDataContext context)
         {
-            new Project 
-            {
-                Id = 0, Name = "First", Priority = 1, ProjectStatus = ProjectStatus.NotStarted, StartDate = new DateTime(2022, 01, 01), EndDate = new DateTime(2023, 01, 01)
-            },
-            new Project
-            {
-                Id = 1, Name = "Second", Priority = 2, ProjectStatus = ProjectStatus.Completed, StartDate = new DateTime(2022, 02, 01), EndDate = new DateTime(2023, 01, 01)
-            },
-            new Project
-            {
-                Id = 2, Name = "Third", Priority = 1, ProjectStatus = ProjectStatus.Active, StartDate = new DateTime(2022, 03, 01), EndDate = new DateTime(2023, 01, 01)
-            }
-        };
+            _context= context;
+        }
 
         // GET: api/<ProjectController>
         [HttpGet]
-        public IEnumerable<Project> Get()
+        public async Task<IActionResult> GetAllProjects()
         {
-            return _projects;
+            return Ok(await _context.Projects.ToListAsync());
         }
 
         // GET api/<ProjectController>/5
         [HttpGet("{id}")]
         public Project Get(int id)
         {
-            return _projects.SingleOrDefault(x => x.Id == id);
+            return _context.Projects.SingleOrDefault(x => x.Id == id);
         }
 
-        // POST api/<ProjectController>
+        // POST api/<ProjectController>/AddProject
         [HttpPost]
-        public void Post([FromBody] Project value)
+        public async Task<IActionResult> AddProject([FromBody] ProjectRequest value)
         {
-            _projects.Add(value);
+            var project = new Project()
+            {
+                Id = value.Id,
+                Name = value.Name,
+                Priority = value.Priority,
+                ProjectStatus = value.ProjectStatus,
+                StartDate = value.StartDate,
+                EndDate = value.EndDate
+            };
+
+            await _context.Projects.AddAsync(project);
+            await _context.SaveChangesAsync();
+
+            return Ok(project);
         }
 
         // DELETE api/<ProjectController>/5
