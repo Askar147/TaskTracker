@@ -36,6 +36,22 @@ namespace TaskTracker.Controllers
             return NotFound();
         }
 
+        [HttpGet("from")]
+        public async Task<IActionResult> GetAllTasksFromProject([FromQuery] int projectId)
+        {
+            var project = await _context.Projects
+                .Include(p => p.Tasks)
+                .Where(p => p.Id == projectId)
+                .SingleOrDefaultAsync();
+
+            if (project != null)
+            {
+                return Ok(project.Tasks);
+            }
+
+            return NotFound();
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddTask([FromBody] ProjectTaskRequest value)
         {
