@@ -28,11 +28,8 @@ namespace TaskTracker.Controllers
         }
 
         // GET api/<ProjectController>/5
-        [HttpGet("{id}")]
-        public Project Get(int id)
-        {
-            return _context.Projects.SingleOrDefault(x => x.Id == id);
-        }
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> Get(int id) => Ok(await _context.Projects.FindAsync(id));
 
         // POST api/<ProjectController>/AddProject
         [HttpPost]
@@ -54,15 +51,24 @@ namespace TaskTracker.Controllers
             return Ok(project);
         }
 
-        // DELETE api/<ProjectController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateProject([FromRoute] int id, [FromBody] ProjectRequest value)
         {
-            var act = _projects.Find(x => x.Id == id);
-            if (act != null)
+            var project = await _context.Projects.FindAsync(id);
+
+            if (project != null)
             {
-                _projects.Remove(act);
+                project.Name = value.Name;
+                project.Priority = value.Priority;
+                project.ProjectStatus = value.ProjectStatus;
+                project.StartDate = value.StartDate;
+                project.EndDate = value.EndDate;
+
+                await _context.SaveChangesAsync();
+                return Ok(project);
             }
+
+            return NotFound();
         }
     }
 }
