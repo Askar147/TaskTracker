@@ -29,7 +29,17 @@ namespace TaskTracker.Controllers
 
         // GET api/<ProjectController>/5
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> Get(int id) => Ok(await _context.Projects.FindAsync(id));
+        public async Task<IActionResult> Get(int id)
+        {
+            var project = await _context.Projects.FindAsync(id);
+
+            if (project != null)
+            {
+                return Ok(project);
+            }
+
+            return NotFound();
+        }
 
         // POST api/<ProjectController>/AddProject
         [HttpPost]
@@ -64,6 +74,21 @@ namespace TaskTracker.Controllers
                 project.StartDate = value.StartDate;
                 project.EndDate = value.EndDate;
 
+                await _context.SaveChangesAsync();
+                return Ok(project);
+            }
+
+            return NotFound();
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteProject([FromRoute] int id)
+        {
+            var project = await _context.Projects.FindAsync(id);
+
+            if (project != null)
+            {
+                _context.Remove(project);
                 await _context.SaveChangesAsync();
                 return Ok(project);
             }
