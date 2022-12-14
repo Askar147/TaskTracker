@@ -12,6 +12,6 @@ namespace TaskTrackerData.Repositories
         public void Delete(T _object);
         public void Update(T _object);
         public Task<IEnumerable<T>> GetAll();
-        public Task<T> GetById(int Id);
+        public Task<T> GetById(int id);
     }
 }
