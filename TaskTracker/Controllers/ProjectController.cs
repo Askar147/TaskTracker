@@ -23,18 +23,16 @@ namespace TaskTracker.Controllers
             _logic = new ProjectLogic(repository);
         }
 
-        // GET: api/<ProjectController>
         [HttpGet]
         public async Task<IActionResult> GetAllProjects()
         {
-            return Ok(await _context.Projects.ToListAsync());
+            return Ok(await _logic.GetAllProjects());
         }
 
-        // GET api/<ProjectController>/5
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetTask(int id)
+        public async Task<IActionResult> GetProject(int id)
         {
-            var project = await _context.Projects.FindAsync(id);
+            var project = await _logic.GetSingleProject(id);
 
             if (project != null)
             {
@@ -44,31 +42,18 @@ namespace TaskTracker.Controllers
             return NotFound();
         }
 
-        // POST api/<ProjectController>/AddProject
         [HttpPost]
         public async Task<IActionResult> AddProject([FromBody] ProjectRequest value)
         {
             return Ok(await _logic.CreateProject(value));
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateProject([FromRoute] int id, [FromBody] ProjectRequest value)
+        [HttpPut]
+        public async Task<IActionResult> UpdateProject([FromBody] ProjectRequest value)
         {
-            var project = await _context.Projects.FindAsync(id);
+            var project = await _logic.UpdateProject(value);
 
-            if (project != null)
-            {
-                project.Name = value.Name;
-                project.Priority = value.Priority;
-                project.ProjectStatus = value.ProjectStatus;
-                project.StartDate = value.StartDate;
-                project.EndDate = value.EndDate;
-
-                await _context.SaveChangesAsync();
-                return Ok(project);
-            }
-
-            return NotFound();
+            return Ok(project);
         }
 
         [HttpDelete("{id:int}")]

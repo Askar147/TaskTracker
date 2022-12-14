@@ -11,6 +11,15 @@ namespace TaskTrackerData.Repositories
         {
             _context = context;
         }
+        public async Task<IEnumerable<Project>> GetAll()
+        {
+            return await _context.Projects.ToListAsync();
+        }
+
+        public async Task<Project> GetById(int id)
+        {
+            return await _context.Projects.FirstOrDefaultAsync(p => p.Id == id);
+        }
 
         public async Task<Project> Create(Project project)
         {
@@ -24,16 +33,6 @@ namespace TaskTrackerData.Repositories
         {
             _context.Remove(project);
             await _context.SaveChangesAsync();
-        }
-
-        public async Task<IEnumerable<Project>> GetAll()
-        {
-            return await _context.Projects.ToListAsync();
-        }
-
-        public async Task<Project> GetById(int id)
-        {
-            return await _context.Projects.FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public void Update(Project project)
