@@ -5,7 +5,7 @@ using TaskTrackerData.Repositories;
 
 namespace TaskTrackerLogic
 {
-    public class ProjectLogic
+    public class ProjectLogic : IProjectLogic
     {
         private readonly IRepository<Project> _repository;
         public ProjectLogic(IRepository<Project> repository) 

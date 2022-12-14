@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TaskTrackerData.Data;
 using TaskTrackerData.Entities;
 using TaskTrackerData.Repositories;
+using TaskTrackerLogic;
 
 namespace TaskTracker
 {
@@ -21,6 +22,7 @@ namespace TaskTracker
                 t => t.UseNpgsql(builder.Configuration.GetConnectionString("TaskTrackerDb"))
                 );
             builder.Services.AddScoped<IRepository<Project>, ProjectRepository>();
+            builder.Services.AddScoped<IProjectLogic, ProjectLogic>();
 
             var app = builder.Build();
 

@@ -14,13 +14,11 @@ namespace TaskTracker.Controllers
     [ApiController]
     public class ProjectController : ControllerBase
     {
-        private readonly TaskTrackerDataContext _context;
-        private readonly ProjectLogic _logic;
+        private readonly IProjectLogic _logic;
 
-        public ProjectController(TaskTrackerDataContext context, IRepository<Project> repository)
+        public ProjectController(IProjectLogic logic)
         {
-            _context = context;
-            _logic = new ProjectLogic(repository);
+            _logic = logic;
         }
 
         [HttpGet]
@@ -32,14 +30,7 @@ namespace TaskTracker.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetProject(int id)
         {
-            var project = await _logic.GetSingleProject(id);
-
-            if (project != null)
-            {
-                return Ok(project);
-            }
-
-            return NotFound();
+            return Ok(await _logic.GetSingleProject(id));
         }
 
         [HttpPost]
