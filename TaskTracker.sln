@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTracker", "TaskTracker\TaskTracker.csproj", "{347B7D5F-58BA-4587-98D8-687B1A8290E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskTracker", "TaskTracker\TaskTracker.csproj", "{347B7D5F-58BA-4587-98D8-687B1A8290E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTrackerData", "TaskTrackerData\TaskTrackerData.csproj", "{B03CBA34-5A6D-4233-AAD7-09FACE30BC9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskTrackerData", "TaskTrackerData\TaskTrackerData.csproj", "{B03CBA34-5A6D-4233-AAD7-09FACE30BC9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTrackerLogic", "TaskTrackerLogic\TaskTrackerLogic.csproj", "{2084ABF7-3F90-4ED0-9FEB-D1E4D090A588}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B03CBA34-5A6D-4233-AAD7-09FACE30BC9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B03CBA34-5A6D-4233-AAD7-09FACE30BC9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B03CBA34-5A6D-4233-AAD7-09FACE30BC9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2084ABF7-3F90-4ED0-9FEB-D1E4D090A588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2084ABF7-3F90-4ED0-9FEB-D1E4D090A588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2084ABF7-3F90-4ED0-9FEB-D1E4D090A588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2084ABF7-3F90-4ED0-9FEB-D1E4D090A588}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

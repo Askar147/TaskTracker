@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskTrackerData.Models.Statuses
+namespace TaskTrackerLogic
 {
-    public enum ProjectTaskStatus
+    public class ProjectLogic
     {
-        ToDO,
-        InProgress,
-        Done
     }
 }

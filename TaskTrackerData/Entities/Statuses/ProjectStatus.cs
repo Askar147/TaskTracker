@@ -1,4 +1,4 @@
-﻿namespace TaskTrackerData.Models.Statuses
+﻿namespace TaskTrackerData.Entities.Statuses
 {
     public enum ProjectStatus
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TaskTrackerData.Models.Statuses;
-
-namespace TaskTrackerData.Models
+using TaskTrackerData.Entities.Statuses;
+    
+namespace TaskTrackerData.Entities
 {
     public class Project
     {

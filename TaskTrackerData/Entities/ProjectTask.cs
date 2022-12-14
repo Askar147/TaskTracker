@@ -1,6 +1,6 @@
-﻿using TaskTrackerData.Models.Statuses;
+﻿using TaskTrackerData.Entities.Statuses;
 
-namespace TaskTrackerData.Models
+namespace TaskTrackerData.Entities
 {
     public class ProjectTask
     {
