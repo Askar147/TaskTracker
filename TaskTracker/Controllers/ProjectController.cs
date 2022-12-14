@@ -48,17 +48,7 @@ namespace TaskTracker.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProject([FromBody] ProjectRequest value)
         {
-            var project = new Project()
-            {
-                Id = value.Id,
-                Name = value.Name,
-                Priority = value.Priority,
-                ProjectStatus = value.ProjectStatus,
-                StartDate = value.StartDate,
-                EndDate = value.EndDate
-            };
-
-            return Ok(await _logic.CreateProject(project));
+            return Ok(await _logic.CreateProject(value));
         }
 
         [HttpPut("{id:int}")]

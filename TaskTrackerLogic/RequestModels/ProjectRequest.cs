@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using TaskTrackerData.Entities;
-using TaskTrackerData.Entities.Statuses;
+﻿using TaskTrackerData.Entities.Statuses;
 
 namespace TaskTracker.RequestModels
 {
