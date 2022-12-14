@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TaskTrackerData.Models;
 
-namespace TaskTrackerData
+namespace TaskTrackerData.Data
 {
     public class TaskTrackerDataContext : DbContext
     {
-        public TaskTrackerDataContext(DbContextOptions<TaskTrackerDataContext> options):
+        public TaskTrackerDataContext(DbContextOptions<TaskTrackerDataContext> options) :
             base(options)
         {
         }
@@ -20,6 +20,6 @@ namespace TaskTrackerData
         }
 
         public DbSet<Project> Projects { get; set; }
-        public DbSet<ProjectTask> Tasks { get; set;}
+        public DbSet<ProjectTask> Tasks { get; set; }
     }
 }
