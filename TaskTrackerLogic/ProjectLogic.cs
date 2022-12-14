@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TaskTrackerData.Entities;
+using TaskTrackerData.Repositories;
 
 namespace TaskTrackerLogic
 {
     public class ProjectLogic
     {
+        private readonly IRepository<Project> _repository;
+        public ProjectLogic(IRepository<Project> repository) 
+        {
+            _repository = repository;
+        }
 
-        public ProjectLogic() { }
+        public async Task<Project> CreateProject(Project project)
+        {
+            return await _repository.Create(project);
+        }
     }
 }

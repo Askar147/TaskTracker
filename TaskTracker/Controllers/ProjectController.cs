@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using TaskTracker.RequestModels;
 using TaskTrackerData.Data;
 using TaskTrackerData.Entities;
+using TaskTrackerData.Repositories;
+using TaskTrackerLogic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,10 +15,12 @@ namespace TaskTracker.Controllers
     public class ProjectController : ControllerBase
     {
         private readonly TaskTrackerDataContext _context;
+        private readonly ProjectLogic _logic;
 
-        public ProjectController(TaskTrackerDataContext context)
+        public ProjectController(TaskTrackerDataContext context, IRepository<Project> repository)
         {
             _context = context;
+            _logic = new ProjectLogic(repository);
         }
 
         // GET: api/<ProjectController>
@@ -54,10 +58,7 @@ namespace TaskTracker.Controllers
                 EndDate = value.EndDate
             };
 
-            await _context.Projects.AddAsync(project);
-            await _context.SaveChangesAsync();
-
-            return Ok(project);
+            return Ok(await _logic.CreateProject(project));
         }
 
         [HttpPut("{id:int}")]

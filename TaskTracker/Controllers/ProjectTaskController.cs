@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskTracker.RequestModels;
 using TaskTrackerData.Data;
-using TaskTrackerData.Models;
+using TaskTrackerData.Entities;
 
 namespace TaskTracker.Controllers
 {

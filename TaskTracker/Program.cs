@@ -20,7 +20,7 @@ namespace TaskTracker
             builder.Services.AddDbContext<TaskTrackerDataContext>(
                 t => t.UseNpgsql(builder.Configuration.GetConnectionString("TaskTrackerDb"))
                 );
-            builder.Services.AddSingleton <IRepository<Project>, ProjectRepository>();
+            builder.Services.AddScoped<IRepository<Project>, ProjectRepository>();
 
             var app = builder.Build();
 
