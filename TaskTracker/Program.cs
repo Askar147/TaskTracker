@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TaskTrackerData.Data;
+using TaskTrackerData.Entities;
+using TaskTrackerData.Repositories;
 
 namespace TaskTracker
 {
@@ -18,6 +20,7 @@ namespace TaskTracker
             builder.Services.AddDbContext<TaskTrackerDataContext>(
                 t => t.UseNpgsql(builder.Configuration.GetConnectionString("TaskTrackerDb"))
                 );
+            builder.Services.AddSingleton <IRepository<Project>, ProjectRepository>();
 
             var app = builder.Build();
 

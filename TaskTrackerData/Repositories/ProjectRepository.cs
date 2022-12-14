@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TaskTrackerData.Data;
-using TaskTrackerData.Models;
+using TaskTrackerData.Entities;   
 
 namespace TaskTrackerData.Repositories
 {

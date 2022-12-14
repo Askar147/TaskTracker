@@ -8,5 +8,7 @@ namespace TaskTrackerLogic
 {
     public class ProjectLogic
     {
+
+        public ProjectLogic() { }
     }
 }
