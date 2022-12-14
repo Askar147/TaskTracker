@@ -29,17 +29,17 @@ namespace TaskTrackerData.Repositories
             return project;
         }
 
-        public async void Delete(Project project)
-        {
-            _context.Remove(project);
-            await _context.SaveChangesAsync();
-        }
-
         public void Update(Project project)
         {
             var obj = _context.Update(project);
             if (obj != null)
                 _context.SaveChanges();
+        }
+
+        public async Task Delete(Project project)
+        {
+            _context.Remove(project);
+            await _context.SaveChangesAsync();
         }
     }
 }

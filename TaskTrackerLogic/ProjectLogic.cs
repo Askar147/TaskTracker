@@ -56,5 +56,18 @@ namespace TaskTrackerLogic
 
             return project;
         }
+
+        public async Task<Project> DeleteProject(int id)
+        {
+            var project = await _repository.GetById(id);
+            if (project == null)
+            {
+                throw new ArgumentException(nameof(id));
+            }
+
+            await _repository.Delete(project);
+
+            return project;
+        }
     }
 }

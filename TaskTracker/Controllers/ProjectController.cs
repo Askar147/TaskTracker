@@ -59,16 +59,7 @@ namespace TaskTracker.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteProject([FromRoute] int id)
         {
-            var project = await _context.Projects.FindAsync(id);
-
-            if (project != null)
-            {
-                _context.Remove(project);
-                await _context.SaveChangesAsync();
-                return Ok(project);
-            }
-
-            return NotFound();
+            return Ok(await _logic.DeleteProject(id));
         }
     }
 }
