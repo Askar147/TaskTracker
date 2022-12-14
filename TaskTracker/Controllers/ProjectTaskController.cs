@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskTracker.RequestModels;
-using TaskTrackerData;
+using TaskTrackerData.Data;
 using TaskTrackerData.Models;
 
 namespace TaskTracker.Controllers

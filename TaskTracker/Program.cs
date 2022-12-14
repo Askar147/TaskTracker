@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using TaskTrackerData;
+using TaskTrackerData.Data;
 
 namespace TaskTracker
 {

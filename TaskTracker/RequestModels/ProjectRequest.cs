@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TaskTrackerData.Models;
-using TaskTrackerData.Statuses;
+using TaskTrackerData.Models.Statuses;
 
 namespace TaskTracker.RequestModels
 {

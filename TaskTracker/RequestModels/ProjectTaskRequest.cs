@@ -1,4 +1,4 @@
-﻿using TaskTrackerData.Statuses;
+﻿using TaskTrackerData.Models.Statuses;
 
 namespace TaskTracker.RequestModels
 {

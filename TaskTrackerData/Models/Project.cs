@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TaskTrackerData.Statuses;
+using TaskTrackerData.Models.Statuses;
 
 namespace TaskTrackerData.Models
 {
