@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="IProjectTask.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TaskTrackerData\TaskTrackerData.csproj" />
   </ItemGroup>
 

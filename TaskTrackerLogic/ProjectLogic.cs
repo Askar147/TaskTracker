@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TaskTracker.RequestModels;
+﻿using TaskTracker.RequestModels;
 using TaskTrackerData.Entities;
 using TaskTrackerData.Repositories;
 
