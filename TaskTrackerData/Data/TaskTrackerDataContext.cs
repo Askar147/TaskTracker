@@ -12,11 +12,19 @@ namespace TaskTrackerData.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.UseSerialColumns();
             modelBuilder.Entity<ProjectTask>()
                 .HasOne<Project>()
                 .WithMany(p => p.Tasks)
+                .IsRequired(false)
                 .HasForeignKey(t => t.ProjectId);
+
+            modelBuilder.Entity<ProjectTask>()
+                .Property(t => t.TaskStatus)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<Project>()
+                .Property(t => t.ProjectStatus)
+                .HasConversion<string>();
         }
 
         public DbSet<Project> Projects { get; set; }
