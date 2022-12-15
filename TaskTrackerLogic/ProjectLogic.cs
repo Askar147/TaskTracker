@@ -51,7 +51,7 @@ namespace TaskTrackerLogic
             project.StartDate = value.StartDate;
             project.EndDate = value.EndDate;
 
-            _repository.Update(project);
+            await _repository.Update(project);
 
             return project;
         }

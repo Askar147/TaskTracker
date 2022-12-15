@@ -13,7 +13,7 @@ namespace TaskTrackerData.Repositories
         }
         public async Task<IEnumerable<Project>> GetAll()
         {
-            return await _context.Projects.ToListAsync();
+            return await _context.Projects.Include(p => p.Tasks).ToListAsync();
         }
 
         public async Task<Project> GetById(int id)

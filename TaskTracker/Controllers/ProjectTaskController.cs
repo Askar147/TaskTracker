@@ -10,11 +10,9 @@ namespace TaskTracker.Controllers
     [ApiController]
     public class ProjectTaskController : ControllerBase
     {
-        private readonly TaskTrackerDataContext _context;
         private readonly IProjectTaskLogic _logic;
-        public ProjectTaskController(TaskTrackerDataContext context, IProjectTaskLogic logic) 
+        public ProjectTaskController(ProjectTaskLogic logic) 
         {
-            _context = context;
             _logic = logic;
         }
 
@@ -46,22 +44,6 @@ namespace TaskTracker.Controllers
         public async Task<IActionResult> DeleteTask([FromRoute] int id)
         {
             return Ok(await _logic.DeleteProjectTask(id));
-        }
-
-        [HttpGet("from")]
-        public async Task<IActionResult> GetAllTasksFromProject([FromQuery] int projectId)
-        {
-            var project = await _context.Projects
-                .Include(p => p.Tasks)
-                .Where(p => p.Id == projectId)
-                .SingleOrDefaultAsync();
-
-            if (project != null)
-            {
-                return Ok(project.Tasks);
-            }
-
-            return NotFound();
         }
     }
 }

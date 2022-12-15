@@ -52,5 +52,19 @@ namespace TaskTracker.Controllers
         {
             return Ok(await _logic.DeleteProject(id));
         }
+
+        [HttpGet("from")]
+        public async Task<IActionResult> GetAllTasksFromProject([FromQuery] int projectId)
+        {
+            var project = await _logic.GetAllProjects();
+
+
+            if (project != null)
+            {
+                return Ok(project.Where(x => x.Id == projectId));
+            }
+
+            return NotFound();
+        }
     }
 }
