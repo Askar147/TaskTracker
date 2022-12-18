@@ -80,5 +80,16 @@ namespace TaskTrackerLogic
 
             return await _repository.Create(task);
         }
+
+        public async Task<ProjectTask> RemoveTaskFromProject(int id)
+        {
+            var task = await _repository.GetById(id);
+
+            task.ProjectId = null;
+
+            await _repository.Update(task);
+
+            return task;
+        }
     }
 }
