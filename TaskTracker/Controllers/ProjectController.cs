@@ -1,12 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TaskTracker.RequestModels;
-using TaskTrackerData.Data;
-using TaskTrackerData.Entities;
-using TaskTrackerData.Repositories;
 using TaskTrackerLogic;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TaskTracker.Controllers
 {
@@ -65,6 +59,12 @@ namespace TaskTracker.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpPut("add")]
+        public async Task<IActionResult> AddTaskToProject()
+        {
+            return Ok();
         }
     }
 }

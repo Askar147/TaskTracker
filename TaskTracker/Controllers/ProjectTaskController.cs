@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TaskTracker.RequestModels;
-using TaskTrackerData.Data;
 using TaskTrackerLogic;
 
 namespace TaskTracker.Controllers
@@ -11,7 +9,7 @@ namespace TaskTracker.Controllers
     public class ProjectTaskController : ControllerBase
     {
         private readonly IProjectTaskLogic _logic;
-        public ProjectTaskController(ProjectTaskLogic logic) 
+        public ProjectTaskController(IProjectTaskLogic logic) 
         {
             _logic = logic;
         }
