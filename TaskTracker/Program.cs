@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using TaskTrackerData.Data;
 using TaskTrackerData.Entities;
 using TaskTrackerData.Repositories;
@@ -21,6 +22,12 @@ namespace TaskTracker
             builder.Services.AddDbContext<TaskTrackerDataContext>(
                 t => t.UseNpgsql(builder.Configuration.GetConnectionString("TaskTrackerDb"))
                 );
+            builder.Services.AddControllers().AddJsonOptions(x =>
+            {
+                x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+
+                x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+            });
             builder.Services.AddScoped<IRepository<Project>, ProjectRepository>();
             builder.Services.AddScoped<IRepository<ProjectTask>, ProjectTaskRepository>();
             builder.Services.AddScoped<IProjectLogic, ProjectLogic>();
