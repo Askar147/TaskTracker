@@ -43,5 +43,11 @@ namespace TaskTracker.Controllers
         {
             return Ok(await _logic.DeleteProjectTask(id));
         }
+
+        [HttpPut("add")]
+        public async Task<IActionResult> AddTaskToProject(int projectId, [FromBody] ProjectTaskRequest value)
+        {
+            return Ok(await _logic.AddTaskToProject(projectId, value));
+        }
     }
 }

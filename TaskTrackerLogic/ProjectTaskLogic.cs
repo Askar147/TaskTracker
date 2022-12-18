@@ -66,5 +66,19 @@ namespace TaskTrackerLogic
             await _repository.Delete(task);
             return task;
         }
+
+        public async Task<ProjectTask> AddTaskToProject(int projectId, ProjectTaskRequest value)
+        {
+            var task = new ProjectTask
+            {
+                Name = value.Name,
+                Description = value.Description,
+                Priority = value.Priority,
+                TaskStatus = value.TaskStatus,
+                ProjectId = projectId
+            };
+
+            return await _repository.Create(task);
+        }
     }
 }

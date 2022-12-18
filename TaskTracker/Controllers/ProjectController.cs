@@ -52,19 +52,12 @@ namespace TaskTracker.Controllers
         {
             var project = await _logic.GetAllProjects();
 
-
             if (project != null)
             {
                 return Ok(project.Where(x => x.Id == projectId));
             }
 
             return NotFound();
-        }
-
-        [HttpPut("add")]
-        public async Task<IActionResult> AddTaskToProject([FromBody] ProjectTaskRequest projectTask)
-        {
-            return Ok();
         }
     }
 }

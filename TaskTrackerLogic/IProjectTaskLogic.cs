@@ -15,5 +15,6 @@ namespace TaskTrackerLogic
         Task<ProjectTask> CreateProjectTask(ProjectTaskRequest value);
         Task<ProjectTask> UpdateProjectTask(int id, ProjectTaskRequest value);
         Task<ProjectTask> DeleteProjectTask(int id);
+        Task<ProjectTask> AddTaskToProject(int projectId, ProjectTaskRequest value);
     }
 }
