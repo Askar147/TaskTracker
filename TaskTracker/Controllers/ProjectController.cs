@@ -62,7 +62,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPut("add")]
-        public async Task<IActionResult> AddTaskToProject()
+        public async Task<IActionResult> AddTaskToProject([FromBody] ProjectTaskRequest projectTask)
         {
             return Ok();
         }

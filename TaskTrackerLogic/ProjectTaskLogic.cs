@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaskTracker.RequestModels;
+﻿using TaskTracker.RequestModels;
 using TaskTrackerData.Entities;
 using TaskTrackerData.Repositories;
 
@@ -31,8 +26,6 @@ namespace TaskTrackerLogic
         {
             var task = new ProjectTask
             {
-                Id = value.Id,
-                ProjectId = value.ProjectId,
                 Name = value.Name,
                 Description = value.Description,
                 Priority = value.Priority,
@@ -42,16 +35,15 @@ namespace TaskTrackerLogic
             return await _repository.Create(task);
         }
 
-        public async Task<ProjectTask> UpdateProjectTask(ProjectTaskRequest value)
+        public async Task<ProjectTask> UpdateProjectTask(int id, ProjectTaskRequest value)
         {
-            var task = await _repository.GetById(value.Id);
+            var task = await _repository.GetById(id);
 
             if (task == null) 
             {
                 throw new ArgumentException(nameof(value));
             }
 
-            task.ProjectId = value.ProjectId;
             task.Name = value.Name;
             task.Description = value.Description;
             task.Priority = value.Priority;

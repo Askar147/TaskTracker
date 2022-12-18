@@ -33,9 +33,9 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateTask([FromBody] ProjectTaskRequest value)
+        public async Task<IActionResult> UpdateTask(int id, [FromBody] ProjectTaskRequest value)
         {
-            return Ok(await _logic.UpdateProjectTask(value));
+            return Ok(await _logic.UpdateProjectTask(id, value));
         }
 
         [HttpDelete("{id:int}")]

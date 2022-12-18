@@ -68,5 +68,10 @@ namespace TaskTrackerLogic
 
             return project;
         }
+
+        public async Task<Project> AddTaskToProject()
+        {
+            return null;
+        }
     }
 }
