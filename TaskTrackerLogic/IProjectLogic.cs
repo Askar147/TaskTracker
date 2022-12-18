@@ -8,7 +8,7 @@ namespace TaskTrackerLogic
         Task<IEnumerable<Project>> GetAllProjects();
         Task<Project> GetSingleProject(int id);
         Task<Project> CreateProject(ProjectRequest value);
-        Task<Project> UpdateProject(ProjectRequest value);
+        Task<Project> UpdateProject(int id, ProjectRequest value);
         Task<Project> DeleteProject(int id);
     }
 }

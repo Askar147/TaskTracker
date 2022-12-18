@@ -34,9 +34,9 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateProject([FromBody] ProjectRequest value)
+        public async Task<IActionResult> UpdateProject(int id, [FromBody] ProjectRequest value)
         {
-            var project = await _logic.UpdateProject(value);
+            var project = await _logic.UpdateProject(id, value);
 
             return Ok(project);
         }

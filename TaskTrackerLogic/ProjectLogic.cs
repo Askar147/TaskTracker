@@ -26,7 +26,6 @@ namespace TaskTrackerLogic
         {
             var project = new Project()
             {
-                Id = value.Id,
                 Name = value.Name,
                 Priority = value.Priority,
                 ProjectStatus = value.ProjectStatus,
@@ -37,9 +36,9 @@ namespace TaskTrackerLogic
             return await _repository.Create(project);
         }
 
-        public async Task<Project> UpdateProject(ProjectRequest value)
+        public async Task<Project> UpdateProject(int id, ProjectRequest value)
         {
-            var project = await _repository.GetById(value.Id);
+            var project = await _repository.GetById(id);
             if (project == null)
             {
                 throw new ArgumentException(nameof(value));
