@@ -11,6 +11,6 @@ namespace TaskTrackerLogic
         Task<Project> CreateProject(ProjectRequest value);
         Task<Project> UpdateProject(int id, ProjectRequest value);
         Task<Project> DeleteProject(int id);
-        Task<IEnumerable<Project>> SearchProject(string? name, int? priority, ProjectTaskStatus? projectStatus);
+        Task<IEnumerable<Project>> SearchProject(string? name, int? priority, ProjectStatus? projectStatus);
     }
 }

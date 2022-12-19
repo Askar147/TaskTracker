@@ -69,11 +69,11 @@ namespace TaskTrackerLogic
             return project;
         }
 
-        public async Task<IEnumerable<Project>> SearchProject(string? name, int? priority, ProjectTaskStatus? projectStatus)
+        public async Task<IEnumerable<Project>> SearchProject(string? name, int? priority, ProjectStatus? projectStatus)
         {
             var projects = await _repository.GetAll();
 
-            if (string.IsNullOrEmpty(name))
+            if (!string.IsNullOrEmpty(name))
             {
                 projects = projects.Where(p => p.Name.Contains(name));
             }
@@ -85,7 +85,7 @@ namespace TaskTrackerLogic
 
             if(projectStatus != null)
             {
-                projects = projects.Where(p => p.Equals(projectStatus));
+                projects = projects.Where(p => p.ProjectStatus.Equals(projectStatus));
             }
 
             return projects;
