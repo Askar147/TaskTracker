@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using TaskTracker.RequestModels;
+using TaskTrackerData.Entities;
 using TaskTrackerData.Entities.Statuses;
 using TaskTrackerLogic;
 
@@ -17,54 +19,145 @@ namespace TaskTracker.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAllProjects()
         {
-            return Ok(await _logicService.GetAllProjects());
+            try
+            {
+                var projects = await _logicService.GetAllProjects();
+
+                if (projects == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(projects);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpGet("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetProject(int id)
         {
-            return Ok(await _logicService.GetSingleProject(id));
+            try
+            {
+                var project = await _logicService.GetSingleProject(id);
+
+                if (project == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(project);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddProject([FromBody] ProjectRequest value)
         {
-            return Ok(await _logicService.CreateProject(value));
+            try
+            {
+                if (value == null)
+                {
+                    return BadRequest("Project object is null");
+                }
+
+                return Ok(await _logicService.CreateProject(value));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateProject(int id, [FromBody] ProjectRequest value)
         {
-            var project = await _logicService.UpdateProject(id, value);
+            try
+            {
+                if (value == null)
+                {
+                    return BadRequest("Project object is null");
+                }
 
-            return Ok(project);
+                return Ok(await _logicService.UpdateProject(id, value));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpDelete("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteProject([FromRoute] int id)
         {
-            return Ok(await _logicService.DeleteProject(id));
+            try
+            {
+                return Ok(await _logicService.DeleteProject(id));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpGet("from")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAllTasksFromProject([FromQuery] int projectId)
         {
-            var project = await _logicService.GetAllProjects();
-
-            if (project != null)
+            try
             {
-                return Ok(project.Where(x => x.Id == projectId));
-            }
+                var projects = await _logicService.GetAllProjects();
 
-            return NotFound();
+                if (projects == null)
+                {
+                    return NotFound();
+                    
+                }
+                return Ok(projects.Where(x => x.Id == projectId));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpGet("search")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Search(string? name, int? priority, ProjectStatus? projectStatus, DateTime? startDate, DateTime? endDate)
         {
-            return Ok(await _logicService.SearchProject(name, priority, projectStatus, startDate, endDate));
+            try
+            {
+                return Ok(await _logicService.SearchProject(name, priority, projectStatus, startDate, endDate));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+            
         }
     }
 }
