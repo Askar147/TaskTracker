@@ -99,12 +99,12 @@ namespace TaskTrackerLogic
 
             if(!string.IsNullOrEmpty(name))
             {
-                tasks = tasks.Where(p => p.Name.Contains(name));
+                tasks = tasks.Where(p => p.Name?.Contains(name) ?? false);
             }
 
             if (!string.IsNullOrEmpty(description))
             {
-                tasks = tasks.Where(p => p.Description.Contains(description));
+                tasks = tasks.Where(p => p.Description?.Contains(description) ?? false);
             }
 
             if(taskStatus != null)

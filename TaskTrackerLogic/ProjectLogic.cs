@@ -75,7 +75,7 @@ namespace TaskTrackerLogic
 
             if (!string.IsNullOrEmpty(name))
             {
-                projects = projects.Where(p => p.Name.Contains(name));
+                projects = projects.Where(p => p.Name?.Contains(name) ?? false);
             }
 
             if(priority != null)
