@@ -9,35 +9,35 @@ namespace TaskTracker.Controllers
     [ApiController]
     public class ProjectController : ControllerBase
     {
-        private readonly IProjectLogic _logic;
+        private readonly IProjectLogic _logicService;
 
-        public ProjectController(IProjectLogic logic)
+        public ProjectController(IProjectLogic logicService)
         {
-            _logic = logic;
+            _logicService = logicService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllProjects()
         {
-            return Ok(await _logic.GetAllProjects());
+            return Ok(await _logicService.GetAllProjects());
         }
 
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetProject(int id)
         {
-            return Ok(await _logic.GetSingleProject(id));
+            return Ok(await _logicService.GetSingleProject(id));
         }
 
         [HttpPost]
         public async Task<IActionResult> AddProject([FromBody] ProjectRequest value)
         {
-            return Ok(await _logic.CreateProject(value));
+            return Ok(await _logicService.CreateProject(value));
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateProject(int id, [FromBody] ProjectRequest value)
         {
-            var project = await _logic.UpdateProject(id, value);
+            var project = await _logicService.UpdateProject(id, value);
 
             return Ok(project);
         }
@@ -45,13 +45,13 @@ namespace TaskTracker.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteProject([FromRoute] int id)
         {
-            return Ok(await _logic.DeleteProject(id));
+            return Ok(await _logicService.DeleteProject(id));
         }
 
         [HttpGet("from")]
         public async Task<IActionResult> GetAllTasksFromProject([FromQuery] int projectId)
         {
-            var project = await _logic.GetAllProjects();
+            var project = await _logicService.GetAllProjects();
 
             if (project != null)
             {
@@ -64,7 +64,7 @@ namespace TaskTracker.Controllers
         [HttpGet("search")]
         public async Task<IActionResult> Search(string? name, int? priority, ProjectStatus? projectStatus, DateTime? startDate, DateTime? endDate)
         {
-            return Ok(await _logic.SearchProject(name, priority, projectStatus, startDate, endDate));
+            return Ok(await _logicService.SearchProject(name, priority, projectStatus, startDate, endDate));
         }
     }
 }
