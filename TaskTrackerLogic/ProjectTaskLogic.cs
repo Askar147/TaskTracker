@@ -109,7 +109,7 @@ namespace TaskTrackerLogic
 
             if(taskStatus != null)
             {
-                tasks = tasks.Where(p => p.TaskStatus == taskStatus);
+                tasks = tasks.Where(p => p.TaskStatus.Equals(taskStatus));
             }
 
             return tasks;
