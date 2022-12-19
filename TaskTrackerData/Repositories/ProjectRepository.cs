@@ -16,7 +16,7 @@ namespace TaskTrackerData.Repositories
             return await _context.Projects.Include(p => p.Tasks).ToListAsync();
         }
 
-        public async Task<Project> GetById(int id)
+        public async Task<Project?> GetById(int id)
         {
             return await _context.Projects.FirstOrDefaultAsync(p => p.Id == id);
         }

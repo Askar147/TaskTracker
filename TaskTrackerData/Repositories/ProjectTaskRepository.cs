@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaskTrackerData.Data;
 using TaskTrackerData.Entities;
 
@@ -22,7 +17,7 @@ namespace TaskTrackerData.Repositories
             return await _context.Tasks.ToListAsync();
         }
 
-        public async Task<ProjectTask> GetById(int id)
+        public async Task<ProjectTask?> GetById(int id)
         {
             return await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id);
         }
