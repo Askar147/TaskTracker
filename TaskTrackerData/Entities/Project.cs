@@ -10,9 +10,7 @@ namespace TaskTrackerData.Entities
         [Key]
         public int Id { get; set; }
         public string? Name { get; set; }
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
         [DefaultValue(ProjectStatus.NotStarted)]
         public ProjectStatus ProjectStatus { get; set; }
