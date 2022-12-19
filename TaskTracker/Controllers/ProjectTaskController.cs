@@ -58,9 +58,9 @@ namespace TaskTracker.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> Search(string? name, string? description, ProjectTaskStatus? projectStatus)
+        public async Task<IActionResult> Search(string? name, string? description, ProjectTaskStatus? taskStatus)
         {
-            return Ok(await _logic.SearchTask(name, description, projectStatus));
+            return Ok(await _logic.SearchTask(name, description, taskStatus));
         }
     }
 }

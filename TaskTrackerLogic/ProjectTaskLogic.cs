@@ -93,7 +93,7 @@ namespace TaskTrackerLogic
             return task;
         }
 
-        public async Task<IEnumerable<ProjectTask>> SearchTask(string name, string description, ProjectTaskStatus? projectStatus)
+        public async Task<IEnumerable<ProjectTask>> SearchTask(string name, string description, ProjectTaskStatus? taskStatus)
         {
             var projects = await _repository.GetAll();
 
@@ -107,9 +107,9 @@ namespace TaskTrackerLogic
                 projects = projects.Where(p => p.Description.Contains(description));
             }
 
-            if(projectStatus != null)
+            if(taskStatus != null)
             {
-                projects = projects.Where(p => p.TaskStatus == projectStatus);
+                projects = projects.Where(p => p.TaskStatus == taskStatus);
             }
 
             return projects;
