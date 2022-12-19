@@ -93,23 +93,33 @@ namespace TaskTrackerLogic
             return task;
         }
 
-        public async Task<IEnumerable<ProjectTask>> SearchTask(string? name, string? description, ProjectTaskStatus? taskStatus)
+        public async Task<IEnumerable<ProjectTask>> SearchTask(string? name, string? description, ProjectTaskStatus? taskStatus, int? startPriority, int? endPriority)
         {
             var tasks = await _repository.GetAll();
 
             if(!string.IsNullOrEmpty(name))
             {
-                tasks = tasks.Where(p => p.Name?.Contains(name) ?? false);
+                tasks = tasks.Where(t => t.Name?.Contains(name) ?? false);
             }
 
             if (!string.IsNullOrEmpty(description))
             {
-                tasks = tasks.Where(p => p.Description?.Contains(description) ?? false);
+                tasks = tasks.Where(t => t.Description?.Contains(description) ?? false);
             }
 
             if(taskStatus != null)
             {
-                tasks = tasks.Where(p => p.TaskStatus.Equals(taskStatus));
+                tasks = tasks.Where(t => t.TaskStatus.Equals(taskStatus));
+            }
+
+            if(startPriority != null)
+            {
+                tasks = tasks.Where(t => t.Priority > startPriority);
+            }
+
+            if(endPriority != null)
+            {
+                tasks = tasks.Where(t => t.Priority < endPriority);
             }
 
             return tasks;
