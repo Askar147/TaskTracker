@@ -95,24 +95,24 @@ namespace TaskTrackerLogic
 
         public async Task<IEnumerable<ProjectTask>> SearchTask(string? name, string? description, ProjectTaskStatus? taskStatus)
         {
-            var projects = await _repository.GetAll();
+            var tasks = await _repository.GetAll();
 
             if(!string.IsNullOrEmpty(name))
             {
-                projects = projects.Where(p => p.Name.Contains(name));
+                tasks = tasks.Where(p => p.Name.Contains(name));
             }
 
             if (!string.IsNullOrEmpty(description))
             {
-                projects = projects.Where(p => p.Description.Contains(description));
+                tasks = tasks.Where(p => p.Description.Contains(description));
             }
 
             if(taskStatus != null)
             {
-                projects = projects.Where(p => p.TaskStatus == taskStatus);
+                tasks = tasks.Where(p => p.TaskStatus == taskStatus);
             }
 
-            return projects;
+            return tasks;
         }
     }
 }
