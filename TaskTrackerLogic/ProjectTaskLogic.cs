@@ -1,5 +1,6 @@
 ﻿using TaskTracker.RequestModels;
 using TaskTrackerData.Entities;
+using TaskTrackerData.Entities.Statuses;
 using TaskTrackerData.Repositories;
 
 namespace TaskTrackerLogic
@@ -90,6 +91,28 @@ namespace TaskTrackerLogic
             await _repository.Update(task);
 
             return task;
+        }
+
+        public async Task<IEnumerable<ProjectTask>> SearchTask(string name, string description, ProjectTaskStatus? projectStatus)
+        {
+            var projects = await _repository.GetAll();
+
+            if(!string.IsNullOrEmpty(name))
+            {
+                projects = projects.Where(p => p.Name.Contains(name));
+            }
+
+            if (!string.IsNullOrEmpty(description))
+            {
+                projects = projects.Where(p => p.Description.Contains(description));
+            }
+
+            if(projectStatus != null)
+            {
+                projects = projects.Where(p => p.TaskStatus == projectStatus);
+            }
+
+            return projects;
         }
     }
 }

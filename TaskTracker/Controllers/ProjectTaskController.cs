@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskTracker.RequestModels;
+using TaskTrackerData.Entities.Statuses;
 using TaskTrackerLogic;
 
 namespace TaskTracker.Controllers
@@ -54,6 +55,12 @@ namespace TaskTracker.Controllers
         public async Task<IActionResult> RemoveTaskFromProject(int id)
         {
             return Ok(await _logic.RemoveTaskFromProject(id));
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> Search(string? name, string? description, ProjectTaskStatus? projectStatus)
+        {
+            return Ok(await _logic.SearchTask(name, description, projectStatus));
         }
     }
 }
