@@ -7,7 +7,7 @@ namespace TaskTrackerLogic
     public interface IProjectTaskLogic
     {
         Task<IEnumerable<ProjectTask>> GetAllProjectTasks();
-        Task<ProjectTask> GetSingleProjectTask(int id);
+        Task<ProjectTask?> GetSingleProjectTask(int id);
         Task<ProjectTask> CreateProjectTask(ProjectTaskRequest value);
         Task<ProjectTask> UpdateProjectTask(int id, ProjectTaskRequest value);
         Task<ProjectTask> DeleteProjectTask(int id);

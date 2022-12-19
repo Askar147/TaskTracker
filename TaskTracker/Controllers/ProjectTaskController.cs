@@ -19,11 +19,21 @@ namespace TaskTracker.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAllTasks()
         {
             try
             {
-                return Ok(await _logicService.GetAllProjectTasks());
+                var tasks = await _logicService.GetAllProjectTasks();
+
+                if (!tasks.Any())
+                {
+                    return NotFound();
+                }
+
+                return Ok(tasks);
             }
             catch (Exception ex)
             {
@@ -32,11 +42,21 @@ namespace TaskTracker.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetTask(int id)
         {
             try
             {
-                return Ok(await _logicService.GetSingleProjectTask(id));
+                var task = await _logicService.GetSingleProjectTask(id);
+
+                if (task == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(task);
             }
             catch(Exception ex)
             {
@@ -45,13 +65,16 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddTask([FromBody] ProjectTaskRequest value)
         {
             try
             {
                 if (value == null)
                 {
-                    return BadRequest("project is null");
+                    return BadRequest("Project object is null");
                 }
 
                 return Ok(await _logicService.CreateProjectTask(value));
@@ -63,10 +86,18 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateTask(int id, [FromBody] ProjectTaskRequest value)
         {
             try
             {
+                if (value == null)
+                {
+                    return BadRequest("Task object is null");
+                }
+
                 return Ok(await _logicService.UpdateProjectTask(id, value));
             }
             catch (Exception ex)
@@ -76,7 +107,9 @@ namespace TaskTracker.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<IActionResult> DeleteTask([FromRoute] int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteTask(int id)
         {
             try
             {
@@ -89,10 +122,18 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPut("add")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddTaskToProject(int projectId, [FromBody] ProjectTaskRequest value)
         {
             try
             {
+                if (value == null)
+                {
+                    return BadRequest("Task object is null");
+                }
+
                 return Ok(await _logicService.AddTaskToProject(projectId, value));
             }
             catch (Exception ex)
@@ -102,6 +143,8 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPut("remove")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> RemoveTaskFromProject(int id)
         {
             try
@@ -115,6 +158,8 @@ namespace TaskTracker.Controllers
         }
 
         [HttpGet("search")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Search(
             string? name, 
             string? description, 

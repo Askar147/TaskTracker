@@ -18,7 +18,7 @@ namespace TaskTrackerLogic
             return await _repository.GetAll();
         }
 
-        public async Task<ProjectTask> GetSingleProjectTask(int id)
+        public async Task<ProjectTask?> GetSingleProjectTask(int id)
         {
             return await _repository.GetById(id);
         }
