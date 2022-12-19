@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskTracker.RequestModels;
+using TaskTrackerData.Entities.Statuses;
 using TaskTrackerLogic;
 
 namespace TaskTracker.Controllers
@@ -58,6 +59,12 @@ namespace TaskTracker.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> Search(string? name, int? priority, ProjectTaskStatus? projectStatus)
+        {
+            return Ok(await _logic.SearchProject(name, priority, projectStatus));
         }
     }
 }
