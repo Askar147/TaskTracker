@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using TaskTracker.RequestModels;
+﻿using TaskTracker.RequestModels;
 using TaskTrackerData.Entities;
 using TaskTrackerData.Entities.Statuses;
 using TaskTrackerData.Repositories;
