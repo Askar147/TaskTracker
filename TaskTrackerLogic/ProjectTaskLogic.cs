@@ -61,7 +61,7 @@ namespace TaskTrackerLogic
 
             if (task == null)
             {
-                throw new ArgumentException(nameof(id));
+                throw new ArgumentNullException(nameof(id), "Project with such id does not exist");
             }
 
             await _repository.Delete(task);
@@ -85,6 +85,11 @@ namespace TaskTrackerLogic
         public async Task<ProjectTask> RemoveTaskFromProject(int id)
         {
             var task = await _repository.GetById(id);
+
+            if (task == null)
+            {
+                throw new ArgumentNullException(nameof(id), "Project with such id does not exist");
+            }
 
             task.ProjectId = null;
 
