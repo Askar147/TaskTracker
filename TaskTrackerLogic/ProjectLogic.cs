@@ -1,4 +1,5 @@
-﻿using TaskTracker.RequestModels;
+﻿using Newtonsoft.Json.Linq;
+using TaskTracker.RequestModels;
 using TaskTrackerData.Entities;
 using TaskTrackerData.Entities.Statuses;
 using TaskTrackerData.Repositories;
@@ -42,7 +43,7 @@ namespace TaskTrackerLogic
             var project = await _repository.GetById(id);
             if (project == null)
             {
-                throw new ArgumentException(nameof(value));
+                throw new ArgumentNullException(nameof(value), "Project with such id does not exist");
             }
 
             project.Name = value.Name;
@@ -61,7 +62,7 @@ namespace TaskTrackerLogic
             var project = await _repository.GetById(id);
             if (project == null)
             {
-                throw new ArgumentException(nameof(id));
+                throw new ArgumentNullException(nameof(id), "Project with such id does not exist");
             }
 
             await _repository.Delete(project);
