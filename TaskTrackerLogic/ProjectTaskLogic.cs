@@ -42,7 +42,7 @@ namespace TaskTrackerLogic
 
             if (task == null) 
             {
-                throw new ArgumentException(nameof(value));
+                throw new ArgumentNullException(nameof(id), "Project with such id does not exist");
             }
 
             task.Name = value.Name;

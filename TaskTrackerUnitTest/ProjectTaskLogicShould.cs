@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 using TaskTracker.RequestModels;
 using TaskTrackerData.Data;
 using TaskTrackerData.Entities;
@@ -167,6 +166,26 @@ namespace TaskTrackerUnitTest
 
             //Assert
             actual.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public async Task Update_Throws_Exception()
+        {
+            //Arrange
+            var taskId = 5;
+            var request = new ProjectTaskRequest
+            {
+                Name = "new",
+                Description = "new description",
+                Priority = 2,
+                TaskStatus = ProjectTaskStatus.Done
+            };
+
+            //Act
+            var actual = async () => { await _logic.UpdateProjectTask(taskId, request); };
+
+            //Assert
+            await actual.Should().ThrowAsync<ArgumentNullException>();
         }
 
         [Fact]
